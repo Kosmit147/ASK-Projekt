@@ -13,6 +13,6 @@ architecture Behavioral of Adder is
 begin
   process (x)
   begin
-    y <= x;
+    y <= x+1;
   end process;
 end architecture Behavioral;

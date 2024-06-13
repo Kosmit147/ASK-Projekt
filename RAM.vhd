@@ -23,7 +23,7 @@ architecture Behavioral of RAM is
 begin
     process (clk)
     begin
-        if rising_edge(clk) then
+        if clk = '1' then
             if we = '1' then
                 ram(conv_integer(addr)) <= data_in;  -- Zapis danych do pamięci
             end if;
