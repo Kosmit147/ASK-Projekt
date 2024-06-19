@@ -3,29 +3,29 @@ use IEEE.std_logic_1164.all;
 
 entity mux6 is
   port(
-    a1  : in  std_logic_vector(7 downto 0);
-    a2  : in  std_logic_vector(7 downto 0);
-    a3  : in  std_logic_vector(7 downto 0);
-    a4  : in  std_logic_vector(7 downto 0);
-    a5  : in  std_logic_vector(7 downto 0);
-    a6  : in  std_logic_vector(7 downto 0);
-    sel : in  std_logic_vector(2 downto 0);
-    b   : out std_logic_vector(7 downto 0)
+    V  : in  std_logic;
+    C  : in  std_logic;
+    Z  : in  std_logic;
+    S  : in  std_logic;
+    one  : in  std_logic;
+    zero  : in  std_logic;
+    x : in  std_logic_vector(2 downto 0);
+    res   : out std_logic
   );
 end mux6;
 
 architecture rtl of mux6 is
 begin
-  p_mux : process(a1, a2, a3, a4, a5, a6, sel)
+  p_mux : process(V, C, Z, S, one, zero, x)
   begin
-    case sel is
-      when "000" => b <= a1;
-      when "001" => b <= a2;
-      when "010" => b <= a3;
-      when "011" => b <= a4;
-      when "100" => b <= a5;
-      when "101" => b <= a6;
-      when others => b <= (others => '0');
+    case x is
+      when "000" => res <= V;
+      when "001" => res <= C;
+      when "010" => res <= Z;
+      when "011" => res <= S;
+      when "100" => res <= one;
+      when "101" => res <= zero;
+      when others => res <= '0';
     end case;
   end process p_mux;
 end rtl;
