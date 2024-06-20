@@ -3,7 +3,7 @@ use IEEE.std_logic_1164.all;
 
 entity sel_splitter is
   port(
-    QROM      : in  std_logic_vector(7 downto 0);
+    QROM      : in  std_logic_vector(21 downto 0);
     S_BBm     : out std_logic;
     S_BB_IR   : out std_logic;
     S_selBB   : out std_logic;
@@ -12,6 +12,7 @@ entity sel_splitter is
     S_selBA   : out std_logic;
     SALU      : out std_logic;
     SA        : out std_logic;
+	 Sid        : out std_logic;
 	 Srd		  : out std_logic;
 	 Swr       : out std_logic
   );
@@ -29,7 +30,8 @@ begin
     S_selBA <= QROM(5);
     SALU    <= QROM(6);
     SA      <= QROM(7);
-	 Srd     <= QROM(8);
-	 Swr     <= QROM(9);
+	 Sid		<= QROM(8);
+	 Srd     <= QROM(9);
+	 Swr     <= QROM(10);
   end process p_splitter;
 end rtl;
