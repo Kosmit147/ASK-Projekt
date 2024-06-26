@@ -1,0 +1,125 @@
+WIDTH=32; 
+DEPTH=512; 
+ADDRESS_RADIX=HEX; 
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+  -- Skoki
+  -- jmp nat
+  0000 : 1001; -- MAR <- PC
+  0001 : 2002; -- MBR <- MEMORY[MAR]
+  0002 : 3003; -- PC <- MBR
+  0003 : 0000; -- NOP
+  
+  -- jg nat
+  0010 : 1001; -- MAR <- PC
+  0011 : 2002; -- MBR <- MEMORY[MAR]
+  0012 : 4004; -- IF FLAGS > THEN PC <- MBR
+  0013 : 0000; -- NOP
+  
+  -- jl nat
+  0020 : 1001; -- MAR <- PC
+  0021 : 2002; -- MBR <- MEMORY[MAR]
+  0022 : 5005; -- IF FLAGS < THEN PC <- MBR
+  0023 : 0000; -- NOP
+  
+  -- je nat
+  0030 : 1001; -- MAR <- PC
+  0031 : 2002; -- MBR <- MEMORY[MAR]
+  0032 : 6006; -- IF FLAGS == THEN PC <- MBR
+  0033 : 0000; -- NOP
+  
+  -- jmp rej
+  0040 : 7007; -- PC <- R[R2]
+  0041 : 0000; -- NOP
+  
+  -- jg rej
+  0050 : 8008; -- IF FLAGS > THEN PC <- R[R2]
+  0051 : 0000; -- NOP
+  
+  -- jl rej
+  0060 : 9009; -- IF FLAGS < THEN PC <- R[R2]
+  0061 : 0000; -- NOP
+  
+  -- je rej
+  0070 : A00A; -- IF FLAGS == THEN PC <- R[R2]
+  0071 : 0000; -- NOP
+
+  -- Operacje logiczne
+  -- and reg, nat
+  0100 : 1001; -- MAR <- PC
+  0101 : 2002; -- MBR <- MEMORY[MAR]
+  0102 : B00B; -- R[R3] <- R[R3] AND MBR
+  0103 : 0000; -- NOP
+  
+  -- and reg, reg
+  0110 : C00C; -- R[R3] <- R[R3] AND R[R4]
+  0111 : 0000; -- NOP
+  
+  -- or reg, nat
+  0120 : 1001; -- MAR <- PC
+  0121 : 2002; -- MBR <- MEMORY[MAR]
+  0122 : D00D; -- R[R3] <- R[R3] OR MBR
+  0123 : 0000; -- NOP
+  
+  -- or reg, reg
+  0130 : E00E; -- R[R3] <- R[R3] OR R[R4]
+  0131 : 0000; -- NOP
+  
+  -- xor reg, nat
+  0140 : 1001; -- MAR <- PC
+  0141 : 2002; -- MBR <- MEMORY[MAR]
+  0142 : F00F; -- R[R3] <- R[R3] XOR MBR
+  0143 : 0000; -- NOP
+  
+  -- xor reg, reg
+  0150 : 0000; -- NOP
+
+  -- Operacje arytmetyczne i na stosie
+  -- add reg, nat
+  0160 : 1001; -- MAR <- PC
+  0161 : 2002; -- MBR <- MEMORY[MAR]
+  0162 : 3003; -- R[R3] <- R[R3] + MBR
+  0163 : 0000; -- NOP
+  
+  -- add reg, reg
+  0170 : 4004; -- R[R3] <- R[R3] + R[R4]
+  0171 : 0000; -- NOP
+  
+  -- sub reg, nat
+  0180 : 1001; -- MAR <- PC
+  0181 : 2002; -- MBR <- MEMORY[MAR]
+  0182 : 5005; -- R[R3] <- R[R3] - MBR
+  0183 : 0000; -- NOP
+  
+  -- sub reg, reg
+  0190 : 6006; -- R[R3] <- R[R3] - R[R4]
+  0191 : 0000; -- NOP
+  
+  -- cmp reg, nat
+  01A0 : 1001; -- MAR <- PC
+  01A1 : 2002; -- MBR <- MEMORY[MAR]
+  01A2 : 7007; -- FLAGS <- R[R3] - MBR
+  01A3 : 0000; -- NOP
+  
+  -- cmp reg, reg
+  01B0 : 8008; -- FLAGS <- R[R3] - R[R4]
+  01B1 : 0000; -- NOP
+
+  -- Przesyłanie danych
+  -- mov reg, nat
+  01C0 : 1001; -- MAR <- PC
+  01C1 : 2002; -- MBR <- MEMORY[MAR]
+  01C2 : 9009; -- R[R3] <- MBR
+  01C3 : 0000; -- NOP
+  
+  -- mov reg, reg
+  01D0 : A00A; -- R[R3] <- R[R4]
+  01D1 : 0000; -- NOP
+  
+  -- mov mem, reg
+  01E0 : B00B; -- MEMORY[MAR] <- R[R3]
+  01E1 : 0000; -- NOP
+  
+  -- Pozostałe operacje
+END;

@@ -19,12 +19,12 @@ begin
     case SALU is
       when "000" => result <= std_logic_vector(unsigned(AB) + unsigned(AC)); -- Dodawanie
       when "001" => result <= std_logic_vector(unsigned(AB) - unsigned(AC)); -- Odejmowanie
-      when "010" => result <= std_logic_vector(unsigned(AB) * unsigned(AC)); -- Mnożenie
+      when "010" => result <= std_logic_vector(unsigned(AB) * unsigned(AC))(7 downto 0); -- Mnożenie
       when "011" => result <= std_logic_vector(unsigned(AB) / unsigned(AC)); -- Dzielenie
       when "100" => result <= std_logic_vector(AB and AC); -- AND
       when "101" => result <= std_logic_vector(AB or AC); -- OR
 		when "110" => result <= std_logic_vector(AB xor AC); -- XOR
-      when others => result <= "0000";
+      when others => result <= "00000000";
     end case;
   end process p_alu;
 end rtl;
